@@ -1,10 +1,14 @@
 ## Packer template for Mint Cinnamon 17.3
 
 Not finding an existing ''working' Packer template for Mint Cinnamon, this is a an attempt to create one based upon
-the existing excellent [boxcutter ubuntu templates](https://github.com/boxcutter/ubuntu) mixed with the
+the excellent [boxcutter ubuntu templates](https://github.com/boxcutter/ubuntu), mixed with some pieces from the
 [StefanScherer mint template](https://github.com/StefanScherer/mint). 
 
-In order to keep this template 'lightweight' (and because I
+### Avaiable Online ###
+
+This box has been pre-built and uploaded to the [Hashicorp Atlas repository](https://atlas.hashicorp.com/boxes/search). Specifically, [it is available here as rapa/mint-17.3-dev](https://atlas.hashicorp.com/rapa/boxes/mint-17.3-dev)
+
+In order to keep this template simple (and because I
 didn't have the capacity to test/verify other versions) the only builder remaining in the scripts is for [VirtualBox](https://www.virtualbox.org/).
 
 ### Packer
@@ -13,9 +17,9 @@ You can download [Packer here](https://packer.io/). It is used to script the cre
 
 ### Mint Cinnamon
 
-Based upon the boxcutter templates, this template retains the use of JSON files containing user variables to build specific versions of Mint,
-although only one is implemented at this time. You tell `packer` to use a specific user variable file via the `-var-file=` command line
-option.  This will add to and override the default options on the core `mint.json` packer template - if  no 'var' file is specified, the build will fail.
+Based upon the boxcutter templates, this template retains use of then JSON files containing user variables that enable variations in building specific versions of your box,
+although only a single variation remains at this time. You tell `packer` to use a specific JSON file via the `-var-file=` command line
+option.  This will add to, and override, the default options in the core `mint.json` packer template - if  no 'var' file is specified, the build will fail.
 
 ### Build Environment
 
@@ -33,7 +37,7 @@ To build a Mint Cinnamon 17.3 Vagrant VirtualBox VM, execute the following from 
     
 Once the build has completed, you can create the actual VM image in vagrant with something like the following:
 
-    $ vagrant box add mintBox box/virtualbox/mint-cinnamon-17.3--1.0.0.box
+    $ vagrant box add mintBox box/virtualbox/mint-cinnamon-17.3-box--dev-1.0.0.box
     $ vagrant init mintBox
     $ vagrant up
     
