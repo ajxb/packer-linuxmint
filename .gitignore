@@ -1,0 +1,4 @@
+output-virtualbox-iso
+*.box
+.vagrant/
+Vagrantfile
