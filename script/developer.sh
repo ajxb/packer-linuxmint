@@ -10,13 +10,18 @@ apt="apt-get -qq -y"
 DOCKER_COMPOSE_VERSION="1.6.2"
 RUBY_VERSION="2.3"
 SCALA_VERSION="2.11.8"
+GO_VERSION="1.6"
+SWIFT_VERSION="2.2"
+SWIFT_PLAT1="ubuntu1404"
+SWIFT_PLAT2="ubuntu14.04"
 
 echo " ==> Removing the OpenJDK ..."
 $apt purge openjdk
 
 echo " ==> Installing vim and curl ..."
-$apt install vim curl
+$apt install vim curl pv
 $apt install software-properties-common
+$apt install clang
 
 echo " ==> Installing PHP ..."
 $apt install php5-cli
@@ -106,6 +111,22 @@ curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
 $apt install nodejs
 echo " ==> node version:"
 node --version
+
+echo " ==> Installing Go ..."
+curl -sL https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz | tar  -xz -C /usr/local
+echo "export PATH=\$PATH:/usr/local/go/bin" >> /etc/profile.d/golang.sh
+source /etc/profile.d/golang.sh
+echo " ==> go version:"
+go version
+
+echo " ==> Installing Swift ..."
+curl -sL https://swift.org/builds/swift-${SWIFT_VERSION}-release/${SWIFT_PLAT1}/swift-${SWIFT_VERSION}-RELEASE/swift-${SWIFT_VERSION}-RELEASE-${SWIFT_PLAT2}.tar.gz | tar  -xz -C /usr/local
+mv /usr/local/swift-${SWIFT_VERSION}-RELEASE-${SWIFT_PLAT2}/ /usr/local/swift/
+echo "export PATH=\$PATH:/usr/local/swift/usr/bin" >> /etc/profile.d/swift.sh
+source /etc/profile.d/swift.sh
+echo " ==> swift version:"
+swift --version
+
 
 echo " ==> Installed various developer tools and languages"
 
