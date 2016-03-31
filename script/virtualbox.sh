@@ -13,7 +13,7 @@ if [[ $PACKER_BUILDER_TYPE =~ virtualbox ]]; then
     echo "==> Installing linux-headers and dkms for VirtualBox guest additions"
     # Assuming the following packages are installed
     $apt install linux-headers-$(uname -r) build-essential perl
-    $apt install dkms
+    $apt install dkms linux-headers-generic
 
     if [ -f /etc/init.d/virtualbox-ose-guest-utils ] ; then
         echo "==> The netboot installs the VirtualBox support (old) so we have to remove it."
@@ -40,6 +40,11 @@ if [[ $PACKER_BUILDER_TYPE =~ virtualbox ]]; then
 	umount /mnt
 
 	rm $VBOX_ISO
+
+    echo "==> Installing VirtualBox Manager ..."
+    $apt install virtualbox-5.0
+    echo "==> VBoxManage version:"
+    VBoxManage -v
 
     $apt remove linux-headers-$(uname -r)
     $apt autoremove 

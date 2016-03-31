@@ -14,6 +14,7 @@ GO_VERSION="1.6"
 SWIFT_VERSION="2.2"
 SWIFT_PLAT1="ubuntu1404"
 SWIFT_PLAT2="ubuntu14.04"
+VAGRANT_VERSION="1.8.1"
 
 echo " ==> Removing the OpenJDK ..."
 $apt purge openjdk
@@ -33,7 +34,6 @@ apt-add-repository -y ppa:git-core/ppa
 apt-add-repository -y ppa:brightbox/ruby-ng
 apt-add-repository -y ppa:webupd8team/java
 apt-add-repository -y ppa:andrei-pozolotin/maven3
-#apt-add-repository -y ppa:groovy-dev/groovy  # This PPA does not support trusty
 apt-add-repository -y ppa:cwchien/gradle
 echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823
@@ -42,7 +42,7 @@ echo " ==> Run an 'apt-get update' ..."
 $apt update
 
 echo " ==> Installing git ..."
-$apt install git
+$apt install git gitk git-gui
 echo " ==> git version:"
 git --version
 
@@ -53,28 +53,13 @@ $apt install oracle-java8-installer
 echo " ==> Java version:"
 java -version
 
-# Maybe install sdkman in future for installation of groovy, gradle, scala, sbt, etc.
-#echo " ==> Installing sdkman ..."
-#curl -s http://get.sdkman.io | bash
-#source "$HOME/.sdkman/bin/sdkman-init.sh"
-#echo " ==> sdkman version:"
-#sdk version
-
 echo " ==> Installing maven ..."
 $apt install maven3
-#sdk install maven
 echo " ==> Maven version:"
 mvn -version
 
-#echo " ==> Installing groovy ..."
-#$apt install groovy
-#sdk install groovy
-#echo " ==> Groovy version:"
-#groovy -version
-
 echo " ==> Installing gradle ..."
-apt-get -y install gradle
-#sdk install gradle
+$apt install gradle
 echo " ==> gradle version:"
 gradle -version
 
@@ -84,15 +69,13 @@ echo " ==> ruby version:"
 ruby --version
 
 echo " ==> Installing Scala ..."
-wget http://www.scala-lang.org/files/archive/scala-${SCALA_VERSION}.deb
-dpkg -i scala-${SCALA_VERSION}.deb
+SCALA_TMP="/tmp/vagrant.deb"
+wget http://www.scala-lang.org/files/archive/scala-${SCALA_VERSION}.deb -qO $SCALA_TMP  && sudo dpkg -i $SCALA_TMP; rm $SCALA_TMP
 echo " ==> scala version:"
-scala --version
+scala -version
 
 echo " ==> Installing sbt ..."
 $apt install sbt
-#echo " ==> sbt version:"
-#sbt --version
 
 echo " ==> Installing docker ..."
 wget -qO- https://get.docker.com/ | sh
@@ -127,6 +110,11 @@ source /etc/profile.d/swift.sh
 echo " ==> swift version:"
 swift --version
 
+echo " ==> Installing Vagrant ..."
+VAGRANT_TMP="/tmp/vagrant.deb"
+wget https://releases.hashicorp.com/vagrant/${VAGRANT_VERSION}/vagrant_${VAGRANT_VERSION}_x86_64.deb -qO $VAGRANT_TMP  && sudo dpkg -i $VAGRANT_TMP; rm $VAGRANT_TMP
+echo " ==> vagrant version:"
+vagrant --version
 
 echo " ==> Installed various developer tools and languages"
 

@@ -8,7 +8,7 @@ the excellent [boxcutter ubuntu templates](https://github.com/boxcutter/ubuntu),
 
 This box has been pre-built and uploaded to the [Hashicorp Atlas repository](https://atlas.hashicorp.com/boxes/search). 
 Specifically, [it is available there as rapa/mint-17.3-dev](https://atlas.hashicorp.com/rapa/boxes/mint-17.3-dev).
-This code relates to the 1.1.0 release of that box.
+This code relates to the 1.2.0 release of that box.
 
 In order to keep this template simple (and because I
 didn't have the capacity to test/verify other versions) the only builder remaining in the scripts is for [VirtualBox](https://www.virtualbox.org/).

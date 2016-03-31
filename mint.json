@@ -113,7 +113,7 @@
     "ssh_username": "vagrant",
     "update": "false",
     "vagrantfile_template": "",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "virtualbox_guest_os_type": "Ubuntu_64"
   }
 }
