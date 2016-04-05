@@ -79,14 +79,13 @@ $apt install sbt
 
 echo " ==> Installing docker ..."
 wget -qO- https://get.docker.com/ | sh
-# Add any needed users to the docker group with (re-login required after, vagrant user added in vagrant.sh):
-# sudo usermod -aG docker <user>
 echo " ==> docker version:"
 docker --version
 
 echo " ==> Installing docker-compose ..."
 curl -sL https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
+echo " ==> docker-compose version:"
 docker-compose --version
 
 echo " ==> Installing node.js ..."
@@ -109,6 +108,16 @@ echo "export PATH=\$PATH:/usr/local/swift/usr/bin" >> /etc/profile.d/swift.sh
 source /etc/profile.d/swift.sh
 echo " ==> swift version:"
 swift --version
+
+echo " ==> Installing Rust ..."
+curl -sSf https://static.rust-lang.org/rustup.sh | sh
+echo " ==> rustc version:"
+rustc -V
+
+echo " ==> Installing Haskell ..."
+$apt install haskell-platform
+echo " ==> ghc version:"
+ghc --version
 
 echo " ==> Installing Vagrant ..."
 VAGRANT_TMP="/tmp/vagrant.deb"

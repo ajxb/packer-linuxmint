@@ -8,7 +8,7 @@ the excellent [boxcutter ubuntu templates](https://github.com/boxcutter/ubuntu),
 
 This box has been pre-built and uploaded to the [Hashicorp Atlas repository](https://atlas.hashicorp.com/boxes/search). 
 Specifically, [it is available there as rapa/mint-17.3-dev](https://atlas.hashicorp.com/rapa/boxes/mint-17.3-dev).
-This code relates to the 1.2.0 release of that box.
+This code relates to the 1.3.0 release of that box.
 
 In order to keep this template simple (and because I
 didn't have the capacity to test/verify other versions) the only builder remaining in the scripts is for [VirtualBox](https://www.virtualbox.org/).
@@ -36,6 +36,8 @@ The resultant base image is created with developers in mind. As a consequence, t
 * Node.js 5.9
 * Go 1.6
 * Swift 2.2
+* Rust 1.7
+* Haskell GHC 7.6.3
 * Maven 3.3.9
 * Gradle 2.12
 * sbt 0.13.11
@@ -56,7 +58,7 @@ To build a Mint Cinnamon 17.3 developers Vagrant base box, execute the following
     
 Once the build has completed, you can create the actual VM image in Vagrant with something like the following:
 
-    $ vagrant box add mintBox box/virtualbox/mint-cinnamon-17.3-box--dev-1.2.0.box
+    $ vagrant box add mintBox box/virtualbox/mint-cinnamon-17.3-box--dev-1.3.0.box
     $ vagrant init mintBox
     $ vagrant up
     
