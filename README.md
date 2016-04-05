@@ -23,6 +23,23 @@ Based upon the boxcutter templates, this template retains use of the JSON files 
 although only a single variation remains at this time. You tell`packer`to use a specific JSON file via the `-var-file=` command line
 option.  This will add to, and override, the default options in the core`mint.json`packer template - if  no 'var' file is specified, the build will fail.
 
+### Developers
+
+The resultant base image is created with developers in mind. As a consequence, this build has a `developer.sh` script that installs various programming languages and tools.
+* Git 2.7
+* Docker 1.10
+* Oracle Java 8
+* Scala 2.11
+* Python 2.7
+* PHP 5.5
+* Ruby 2.3
+* Node.js 5.9
+* Go 1.6
+* Swift 2.2
+* Maven 3.3.9
+* Gradle 2.12
+* sbt 0.13.11
+
 ### Build Environment
 
 If you are working/experimenting a lot with packer, it can be worth setting a global packer cache location to reduce the duplication of downloads.
@@ -39,7 +56,7 @@ To build a Mint Cinnamon 17.3 developers Vagrant base box, execute the following
     
 Once the build has completed, you can create the actual VM image in Vagrant with something like the following:
 
-    $ vagrant box add mintBox box/virtualbox/mint-cinnamon-17.3-box--dev-1.0.0.box
+    $ vagrant box add mintBox box/virtualbox/mint-cinnamon-17.3-box--dev-1.2.0.box
     $ vagrant init mintBox
     $ vagrant up
     
