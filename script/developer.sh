@@ -127,9 +127,6 @@ vagrant --version
 
 echo " ==> Installed various developer tools and languages"
 
-#echo " ==> check that the custom files have been 'provisioned'."
-#ls -alF /tmp/files
-
 tar -zxf /tmp/files/themes.tar.gz -C /usr/share/themes
 echo " ==> copied new themes to correct directory."
 
@@ -137,6 +134,9 @@ echo " ==> copied new themes to correct directory."
 cp /tmp/files/60_compact-theme.gschema.override /usr/share/glib-2.0/schemas
 echo " ==> compiling schema changes."
 glib-compile-schemas /usr/share/glib-2.0/schemas
+
+# Make the 'versions.sh' file available globally.
+cp /tmp/files/versions /usr/local/bin
 
 # Set the new theme for root
 echo " ==> setting the cinnamon desktop theme."

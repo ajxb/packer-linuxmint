@@ -8,7 +8,7 @@ the excellent [boxcutter ubuntu templates](https://github.com/boxcutter/ubuntu),
 
 This box has been pre-built and uploaded to the [Hashicorp Atlas repository](https://atlas.hashicorp.com/boxes/search). 
 Specifically, [it is available there as rapa/mint-17.3-dev](https://atlas.hashicorp.com/rapa/boxes/mint-17.3-dev).
-This code relates to the 1.3.0 release of that box.
+This code relates to the 1.3.1 release of that box.
 
 In order to keep this template simple (and because I
 didn't have the capacity to test/verify other versions) the only builder remaining in the scripts is for [VirtualBox](https://www.virtualbox.org/).
@@ -26,21 +26,24 @@ option.  This will add to, and override, the default options in the core`mint.js
 ### Developers
 
 The resultant base image is created with developers in mind. As a consequence, this build has a `developer.sh` script that installs various programming languages and tools.
-* Git 2.7
-* Docker 1.10
-* Oracle Java 8
-* Scala 2.11
-* Python 2.7
-* PHP 5.5
-* Ruby 2.3
-* Node.js 5.9
+* Git 2.8.3
+* Python 2.7.6
+* Oracle Java 1.8.0_91
+* Scala 2.11.8
+* PHP 5.5.9
+* Ruby 2.3.1p112
+* Node.js 5.11.1
 * Go 1.6
 * Swift 2.2
-* Rust 1.7
+* Rust 1.9.0
 * Haskell GHC 7.6.3
 * Maven 3.3.9
-* Gradle 2.12
+* Gradle 2.13
 * sbt 0.13.11
+* Docker 1.11.1
+* docker-compose 1.6.2
+* Vagrant 1.8.1
+* VirtualBox 5.0.2r102096
 
 ### Build Environment
 
@@ -58,7 +61,7 @@ To build a Mint Cinnamon 17.3 developers Vagrant base box, execute the following
     
 Once the build has completed, you can create the actual VM image in Vagrant with something like the following:
 
-    $ vagrant box add mintBox box/virtualbox/mint-cinnamon-17.3-box--dev-1.3.0.box
+    $ vagrant box add mintBox box/virtualbox/mint-cinnamon-17.3-box--dev-1.3.1.box
     $ vagrant init mintBox
     $ vagrant up
     

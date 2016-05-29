@@ -1,0 +1,22 @@
+#!/bin/bash -eu
+
+export DEBIAN_FRONTEND=noninteractive
+
+git --version
+python --version
+echo "java version $(java -version 2>&1 | grep "version" | awk -F"\"" '{print $2}')"
+scala -version 2>&1 | awk -F"-" '{print $1}'
+php --version | grep "^PHP" | awk -F"-" '{print $1}'
+ruby --version  | awk -F"(" '{print $1}'
+echo "node version $(node --version)"
+echo "go version $(go version | awk '{print $3}')"
+swift --version | grep "^Swift" | awk -F"(" '{print $1}'
+rustc -V | awk -F"(" '{print $1}'
+echo "haskell GHC$(ghc --version | awk -F"," '{print $2}')"
+mvn -version | grep "Apache"  | awk -F"(" '{print $1}'
+gradle -version | grep "Gradle"
+#sbt about | grep "This is sbt" | awk '{print $4 " version " $5}'
+docker --version | awk -F"," '{print $1}'
+docker-compose --version | awk -F"," '{print $1}'
+vagrant --version
+echo "VirtualBox version $(vboxmanage --version)"
