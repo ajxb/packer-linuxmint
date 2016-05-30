@@ -4,10 +4,10 @@ export DEBIAN_FRONTEND=noninteractive
 
 git --version
 python --version
-echo "java version $(java -version 2>&1 | grep "version" | awk -F"\"" '{print $2}')"
+echo "Oracle java version $(java -version 2>&1 | grep "version" | awk -F"\"" '{print $2}')"
 scala -version 2>&1 | awk -F"-" '{print $1}'
 php --version | grep "^PHP" | awk -F"-" '{print $1}'
-ruby --version  | awk -F"(" '{print $1}'
+ruby --version | awk -F"(" '{print $1}'
 echo "node version $(node --version)"
 echo "go version $(go version | awk '{print $3}')"
 swift --version | grep "^Swift" | awk -F"(" '{print $1}'

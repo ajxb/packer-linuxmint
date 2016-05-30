@@ -92,5 +92,3 @@ echo ${DISK_USAGE_BEFORE_CLEANUP}
 echo "==> Disk usage after cleanup"
 df -h
 
-echo "==> Installed Development Tools:"
-versions

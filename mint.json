@@ -82,7 +82,8 @@
         "script/cmtool.sh",
         "script/motd.sh",
         "script/minimize.sh",
-        "script/cleanup.sh"
+        "script/cleanup.sh",
+        "script/complete.sh"
       ],
       "type": "shell"
     }
@@ -113,7 +114,7 @@
     "ssh_username": "vagrant",
     "update": "false",
     "vagrantfile_template": "",
-    "version": "1.3.1",
+    "version": "1.3.2",
     "virtualbox_guest_os_type": "Ubuntu_64"
   }
 }
