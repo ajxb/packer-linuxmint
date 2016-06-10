@@ -17,7 +17,7 @@ DOCKER_COMPOSE_VERSION="1.7.1"
 VAGRANT_VERSION="1.8.1"
 
 echo " ==> Removing the OpenJDK ..."
-$apt purge openjdk
+$apt purge openjdk*
 
 echo " ==> Installing vim and curl ..."
 $apt install vim curl pv
