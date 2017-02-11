@@ -1,31 +1,38 @@
+#
+# debian-installer preseed answers. 
+# See    https://www.debian.org/releases/stable/amd64/apb.html.en 
+#  and   https://www.debian.org/releases/stable/example-preseed.txt
+#  for further help and guidance.
+#
 #Step 1
-d-i debian-installer/locale string en_GB
+tasksel tasksel/first multiselect
 
 #Step 2
+d-i pkgsel/language-pack-patterns   string
+d-i debian-installer/locale string en_GB
 d-i time/zone string Europe/London
-
-#Step 3
 d-i console-setup/layoutcode string gb
 
-#Step 4
+#Step 3
 d-i partman-auto/disk string /dev/sda
 d-i partman-auto/choose_recipe select atomic
-d-i partman/confirm_write_new_label boolean true
-d-i partman/choose_partition select finish
-d-i partman/confirm boolean true
-d-i partman-auto-lvm/guided_size string max
 d-i partman-auto/method string lvm
+d-i partman-auto-lvm/guided_size string max
 d-i partman-lvm/confirm boolean true
 d-i partman-lvm/confirm_nooverwrite boolean true
 d-i partman-lvm/device_remove_lvm boolean true
+d-i partman/choose_partition select finish
+d-i partman/confirm boolean true
 d-i partman/confirm_nooverwrite boolean true
+d-i partman/confirm_write_new_label boolean true
+
 d-i grub-installer/only_debian boolean true
 d-i grub-installer/with_other_os boolean true
 
 d-i console-setup/ask_detect boolean false
 d-i keyboard-configuration/layoutcode string gb
 
-#Step 5
+#Step 4
 d-i passwd/user-fullname string vagrant
 d-i passwd/username string vagrant
 d-i passwd/user-password password vagrant
@@ -34,13 +41,24 @@ d-i user-setup/allow-password-weak boolean true
 d-i netcfg/get_hostname string vagrant
 d-i passwd/auto-login boolean true
 
+d-i apt-setup/extras boolean true
+d-i pkgsel/include string openssh-server
+d-i finish-install/reboot_in_progress note
+
+#
+# Ubiquity installer commands.
+# See    https://wiki.ubuntu.com/UbiquityAutomation
+#  for information.
+#
+
 # Use non-free packages
 ubiquity ubiquity/use_nonfree boolean true
 
 #if you want to start commands after the installation
 ubiquity ubiquity/success_command string in-target apt-get -y install openssh-server && /etc/init.d/ssh restart;
+#ubiquity ubiquity/success_command string in-target restart;
 
-#Step 6
+#Step 5
 ubiquity ubiquity/summary note
 ubiquity ubiquity/reboot boolean true
 

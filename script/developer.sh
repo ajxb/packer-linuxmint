@@ -7,14 +7,15 @@ fi
 export DEBIAN_FRONTEND=noninteractive
 apt="apt-get -qq -y"
 
-SCALA_VERSION="2.11.8"
-RUBY_VERSION="2.3"
-GO_VERSION="1.6.2"
-SWIFT_VERSION="2.2.1"
+SCALA_VERSION="2.12.1"
+RUBY_VERSION="2.4"
+NODEJS_VERSION="7.x"
+GO_VERSION="1.7.5"
+SWIFT_VERSION="3.0.2"
 SWIFT_PLAT1="ubuntu1404"
 SWIFT_PLAT2="ubuntu14.04"
-DOCKER_COMPOSE_VERSION="1.7.1"
-VAGRANT_VERSION="1.8.1"
+DOCKER_COMPOSE_VERSION="1.11.0"
+VAGRANT_VERSION="1.9.1"
 
 echo " ==> Removing the OpenJDK ..."
 $apt purge openjdk*
@@ -89,7 +90,7 @@ echo " ==> docker-compose version:"
 docker-compose --version
 
 echo " ==> Installing node.js ..."
-curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_${NODEJS_VERSION} | sudo -E bash -
 $apt install nodejs
 echo " ==> node version:"
 node --version

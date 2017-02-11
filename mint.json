@@ -1,5 +1,5 @@
 {
-  "_comment": "Build with `packer build ubuntu.json`",
+  "_comment": "Build with `packer build mint.json`",
   "builders": [{
     "vm_name": "{{user `vm_name`}}",
     "type": "virtualbox-iso",
@@ -13,14 +13,14 @@
     "ssh_wait_timeout": "10000s",
     "headless": "{{ user `headless` }}",
     "boot_command": [
-      "<esc><wait><esc><wait>",
-      "/casper/vmlinuz initrd=/casper/initrd.lz",
-      " url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/mint-allinone.seed",
-      " boot=casper automatic-ubiquity quiet splash noprompt",
-      " -- ",
-      "<enter>"
+      "{{ user `boot_command_prefix` }}",
+      "/casper/vmlinuz",
+      " url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ user `preseed` }}",
+      " boot=casper automatic-ubiquity debug-ubiquity splash noprompt",
+      " initrd=/casper/initrd.lz -- <enter>"
     ],
     "shutdown_command": "echo '{{ user `ssh_password` }}'|sudo -S shutdown -P now",
+    "post_shutdown_delay": "1m",
     "disk_size": "{{ user `disk_size` }}",
     "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
     "virtualbox_version_file": ".vbox_version",
@@ -106,7 +106,6 @@
     "iso_path": "/tmp/ISOs",
     "memory": "512",
     "no_proxy": "{{env `no_proxy`}}",
-    "preseed" : "preseed.cfg",
     "rsync_proxy": "{{env `rsync_proxy`}}",
     "hostname": "vagrant",
     "ssh_fullname": "vagrant",
@@ -114,7 +113,6 @@
     "ssh_username": "vagrant",
     "update": "false",
     "vagrantfile_template": "",
-    "version": "1.3.3",
     "virtualbox_guest_os_type": "Ubuntu_64"
   }
 }

@@ -1,6 +1,7 @@
 {
-  "_comment": "Build with `packer build -var-file=ubuntu1404-desktop.json ubuntu.json`",
+  "_comment": "Build with `packer build -var-file=mint-cinnamon-17.3.json mint.json`",
   "vm_name": "mint-cinnamon-17.3-box",
+  "version": "1.3.4",
   "desktop": "true",
   "developer": "dev",
   "cpus": "2",
@@ -10,5 +11,6 @@
   "iso_url": "http://mirror.bytemark.co.uk/linuxmint/stable/17.3/linuxmint-17.3-cinnamon-64bit.iso",
   "memory": "6144",
   "preseed": "mint-allinone.seed",
-  "vagrantfile_template": "tpl/vagrantfile-mint-cinnamon-17.3.tpl"
+  "vagrantfile_template": "tpl/vagrantfile-mint-cinnamon-17.3.tpl",
+  "boot_command_prefix": "<esc><wait><esc><wait>"
 }
