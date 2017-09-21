@@ -2,13 +2,13 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-    config.vm.define "vagrant-mint-cinnamon-17.3"
-    config.vm.box = "mint-cinnamon-17.3"
- 
+    config.vm.define "vagrant-mint-cinnamon-18.2"
+    config.vm.box = "mint-cinnamon-18.2"
+
     config.vm.provider :virtualbox do |v, override|
-	    v.name = "mint-cinnamon-17.3"
+	    v.name = "mint-cinnamon-18.2"
         v.gui = true
-        v.customize ["modifyvm", :id, "--memory", 6144]
+        v.customize ["modifyvm", :id, "--memory", 4096]
         v.customize ["modifyvm", :id, "--cpus", 2]
         v.customize ["modifyvm", :id, "--vram", "256"]
         v.customize ["setextradata", "global", "GUI/MaxGuestResolution", "any"]
@@ -18,5 +18,4 @@ Vagrant.configure("2") do |config|
         v.customize ["modifyvm", :id, "--accelerate3d", "on"]
         v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     end
-
 end

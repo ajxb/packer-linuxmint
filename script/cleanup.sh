@@ -2,8 +2,6 @@
 
 apt="apt-get -qq -y"
 
-SSH_USER=${SSH_USERNAME:-vagrant}
-
 # Make sure udev does not block our network - http://6.ptmc.org/?p=164
 echo "==> Cleaning up udev rules"
 rm -rf /dev/.udev/
@@ -17,7 +15,7 @@ fi
 # Ubuntu 12.04 & 14.04
 if [ -d "/var/lib/dhcp" ]; then
     rm /var/lib/dhcp/*
-fi 
+fi
 
 # Add delay to prevent "vagrant reload" from failing
 echo "pre-up sleep 2" >> /etc/network/interfaces
@@ -30,16 +28,13 @@ $apt autoremove --purge
 $apt clean
 $apt autoclean
 
-# echo "==> Installed packages"
-# dpkg --get-selections | grep -v deinstall
-
 df -h
 DISK_USAGE_BEFORE_CLEANUP=$(df -h)
 
 # Remove Bash history
 unset HISTFILE
 rm -f /root/.bash_history
-rm -f /home/${SSH_USER}/.bash_history
+rm -f /home/vagrant/.bash_history
 
 # Clean up log files
 find /var/log -type f | while read f; do echo -ne '' > $f; done;
@@ -91,4 +86,3 @@ echo ${DISK_USAGE_BEFORE_CLEANUP}
 
 echo "==> Disk usage after cleanup"
 df -h
-

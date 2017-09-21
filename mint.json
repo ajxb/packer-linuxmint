@@ -8,25 +8,28 @@
     "iso_url": "{{ user `iso_url` }}",
     "iso_checksum": "{{ user `iso_checksum` }}",
     "iso_checksum_type": "{{ user `iso_checksum_type` }}",
-    "ssh_username": "{{ user `ssh_username` }}",
     "ssh_password": "{{ user `ssh_password` }}",
+    "ssh_username": "{{ user `ssh_username` }}",
     "ssh_wait_timeout": "10000s",
     "headless": "{{ user `headless` }}",
     "boot_command": [
       "{{ user `boot_command_prefix` }}",
-      "/casper/vmlinuz",
-      " url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ user `preseed` }}",
-      " boot=casper automatic-ubiquity debug-ubiquity splash noprompt",
-      " initrd=/casper/initrd.lz -- <enter>"
+      "/casper/vmlinuz ",
+      "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/mint.seed ",
+      "boot=casper ",
+      "initrd=/casper/initrd.lz ",
+      "debug-ubiquity ",
+      "automatic-ubiquity ",
+      "quiet ",
+      "splash ",
+      "noprompt ",
+      "-- <enter>"
     ],
     "shutdown_command": "echo '{{ user `ssh_password` }}'|sudo -S shutdown -P now",
     "post_shutdown_delay": "1m",
     "disk_size": "{{ user `disk_size` }}",
     "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
     "virtualbox_version_file": ".vbox_version",
-    "floppy_files": [
-      "http/{{ user `preseed` }}"
-    ],
     "hard_drive_interface": "sata",
     "output_directory": "output-{{ user `vm_name` }}-virtualbox-iso",
     "vboxmanage": [
@@ -40,6 +43,7 @@
   }],
   "post-processors": [
     {
+      "compression_level": "9",
       "keep_input_artifact": false,
       "output": "box/{{.Provider}}/{{user `vm_name`}}-{{user `cm`}}{{user `cm_version`}}-{{user `developer`}}-{{user `version`}}.box",
       "type": "vagrant",
@@ -48,40 +52,28 @@
   ],
   "provisioners": [
     {
-      "type": "file",
-      "source": "./files",
-      "destination": "/tmp"
-    },  
-    {
-      "environment_vars": [
-        "CM={{user `cm`}}",
-        "CM_VERSION={{user `cm_version`}}",
-        "CLEANUP_PAUSE={{user `cleanup_pause`}}",
-        "DESKTOP={{user `desktop`}}",
-        "DEVELOPER={{user `developer`}}",
-        "DOCKER={{user `docker`}}",
-        "UPDATE={{user `update`}}",
-        "INSTALL_VAGRANT_KEY={{user `install_vagrant_key`}}",
-        "SSH_USERNAME={{user `ssh_username`}}",
-        "SSH_PASSWORD={{user `ssh_password`}}",
-        "http_proxy={{user `http_proxy`}}",
-        "https_proxy={{user `https_proxy`}}",
-        "ftp_proxy={{user `ftp_proxy`}}",
-        "rsync_proxy={{user `rsync_proxy`}}",
-        "no_proxy={{user `no_proxy`}}"
-      ],
       "execute_command": "echo '{{ user `ssh_password` }}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
       "scripts": [
+        "script/sshd.sh"
+      ],
+      "type": "shell"
+    },
+    {
+      "execute_command": "echo '{{ user `ssh_password` }}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
+      "expect_disconnect": true,
+      "scripts": [
         "script/update.sh",
-        "script/desktop.sh",
-        "script/developer.sh",
+        "script/reboot.sh"
+      ],
+      "type": "shell"
+    },
+    {
+      "execute_command": "echo '{{ user `ssh_password` }}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
+      "pause_before": "60s",
+      "scripts": [
         "script/vagrant.sh",
-        "script/sshd.sh",
         "script/virtualbox.sh",
-        "script/docker.sh",
-        "script/cmtool.sh",
         "script/motd.sh",
-        "script/minimize.sh",
         "script/cleanup.sh",
         "script/complete.sh"
       ],
@@ -89,31 +81,18 @@
     }
   ],
   "variables": {
-    "cleanup_pause": "",
-    "cm": "",
-    "cm_version": "",
     "cpus": "1",
-    "custom_script": ".",
     "desktop": "false",
-    "developer": "",
     "disk_size": "65536",
-    "docker": "false",
-    "ftp_proxy": "{{env `ftp_proxy`}}",
-    "headless": "",
-    "http_proxy": "{{env `http_proxy`}}",
-    "https_proxy": "{{env `https_proxy`}}",
-    "install_vagrant_key": "true",
-    "iso_path": "/tmp/ISOs",
+    "headless": "false",
+    "iso_path": "iso",
     "memory": "512",
-    "no_proxy": "{{env `no_proxy`}}",
-    "rsync_proxy": "{{env `rsync_proxy`}}",
     "hostname": "vagrant",
     "ssh_fullname": "vagrant",
     "ssh_password": "vagrant",
     "ssh_username": "vagrant",
-    "update": "false",
+    "update": "true",
     "vagrantfile_template": "",
     "virtualbox_guest_os_type": "Ubuntu_64"
   }
 }
-

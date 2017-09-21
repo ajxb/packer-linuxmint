@@ -1,8 +1,0 @@
-[org.cinnamon.desktop.interface]
-cursor-theme='DMZ-White'
-gtk-theme='Mint-X-Teal-alt'
-icon-theme='Mint-X-Teal'
-
-[org.cinnamon.desktop.wm.preferences]
-theme='Metabox-alt'
-
