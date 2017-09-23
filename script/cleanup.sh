@@ -1,6 +1,6 @@
 #!/bin/bash -eux
 
-apt="apt-get -qq -y"
+DISK_USAGE_BEFORE_CLEANUP=$(df -h)
 
 # Make sure udev does not block our network - http://6.ptmc.org/?p=164
 echo "==> Cleaning up udev rules"
@@ -24,12 +24,9 @@ echo "==> Cleaning up tmp"
 rm -rf /tmp/*
 
 # Cleanup apt cache
-$apt autoremove --purge
-$apt clean
-$apt autoclean
-
-df -h
-DISK_USAGE_BEFORE_CLEANUP=$(df -h)
+apt-get -y autoremove --purge
+apt-get -y clean
+apt-get -y autoclean
 
 # Remove Bash history
 unset HISTFILE

@@ -48,6 +48,7 @@
     {
       "execute_command": "echo '{{ user `ssh_password` }}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
       "scripts": [
+        "script/apt.sh",
         "script/sshd.sh"
       ],
       "type": "shell"
@@ -68,8 +69,7 @@
         "script/vagrant.sh",
         "script/virtualbox.sh",
         "script/motd.sh",
-        "script/cleanup.sh",
-        "script/complete.sh"
+        "script/cleanup.sh"
       ],
       "type": "shell"
     }
