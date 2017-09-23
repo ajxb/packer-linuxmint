@@ -1,5 +1,4 @@
 {
-  "_comment": "Build with `packer build mint.json`",
   "builders": [{
     "vm_name": "{{user `vm_name`}}",
     "type": "virtualbox-iso",
