@@ -2,7 +2,7 @@
   "builders": [{
     "vm_name": "{{user `vm_name`}}",
     "type": "virtualbox-iso",
-    "guest_os_type": "{{ user `virtualbox_guest_os_type` }}",
+    "guest_os_type": "Ubuntu_64",
     "http_directory": "http",
     "iso_url": "{{ user `iso_url` }}",
     "iso_checksum": "{{ user `iso_checksum` }}",
@@ -14,7 +14,7 @@
     "boot_command": [
       "{{ user `boot_command_prefix` }}",
       "/casper/vmlinuz ",
-      "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/mint.seed ",
+      "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ user `preseed` }} ",
       "boot=casper ",
       "initrd=/casper/initrd.lz ",
       "debug-ubiquity ",
@@ -30,21 +30,16 @@
     "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
     "virtualbox_version_file": ".vbox_version",
     "hard_drive_interface": "sata",
-    "output_directory": "output-{{ user `vm_name` }}-virtualbox-iso",
     "vboxmanage": [
-      [
-        "modifyvm", "{{.Name}}", "--memory", "{{ user `memory` }}"
-      ],
-      [
-        "modifyvm", "{{.Name}}", "--cpus", "{{ user `cpus` }}"
-      ]
+      [ "modifyvm", "{{.Name}}", "--memory", "{{ user `memory` }}" ],
+      [ "modifyvm", "{{.Name}}", "--cpus", "{{ user `cpus` }}" ]
     ]
   }],
   "post-processors": [
     {
       "compression_level": "9",
       "keep_input_artifact": false,
-      "output": "box/{{.Provider}}/{{user `vm_name`}}-{{user `cm`}}{{user `cm_version`}}-{{user `developer`}}-{{user `version`}}.box",
+      "output": "box/{{.Provider}}/{{user `vm_name`}}-{{user `version`}}.box",
       "type": "vagrant",
       "vagrantfile_template": "{{ user `vagrantfile_template` }}"
     }
@@ -80,18 +75,23 @@
     }
   ],
   "variables": {
-    "cpus": "1",
-    "desktop": "false",
-    "disk_size": "65536",
     "headless": "false",
-    "iso_path": "iso",
-    "memory": "512",
     "hostname": "vagrant",
     "ssh_fullname": "vagrant",
     "ssh_password": "vagrant",
     "ssh_username": "vagrant",
-    "update": "true",
-    "vagrantfile_template": "",
-    "virtualbox_guest_os_type": "Ubuntu_64"
+
+    "_comment": "Variables below should be overridden in template",
+    "boot_command_prefix": "TBD",
+    "cpus": "TBD",
+    "disk_size": "TBD",
+    "iso_checksum_type": "TBD",
+    "iso_checksum": "TBD",
+    "iso_url": "TBD",
+    "memory": "TBD",
+    "preseed": "TBD",
+    "vagrantfile_template": "TBD",
+    "version": "TBD",
+    "vm_name": "TBD"
   }
 }

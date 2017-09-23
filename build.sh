@@ -10,11 +10,11 @@ fi
 
 START_TIME=$(date +"%s")
 
-# Remove output_virtualbox if it exists,
+# Remove output_virtualbox-iso if it exists,
 # prevents packer failing on box generation
-if [[ -d output-virtualbox ]]; then
-  echo "output-virtualbox already exists, removing"
-  rm -fr output-virtualbox
+if [[ -d output-virtualbox-iso ]]; then
+  echo "output-virtualbox-iso already exists, removing"
+  rm -fr output-virtualbox-iso
 fi
 
 echo "Building ${BOX}"
