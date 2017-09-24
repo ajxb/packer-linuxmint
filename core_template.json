@@ -67,6 +67,7 @@
       "pause_before": "60s",
       "scripts": [
         "script/vagrant.sh",
+        "script/install_puppet.sh",
         "script/virtualbox.sh",
         "script/motd.sh",
         "script/cleanup.sh"
