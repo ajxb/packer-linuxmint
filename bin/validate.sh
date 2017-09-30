@@ -5,6 +5,7 @@
 #
 # Globals:
 #   BOX     - The name of the template to validate
+#   MY_CWD  - Path script was invoked from
 #   MY_PATH - Path to this script
 ###############################################################################
 
@@ -92,7 +93,7 @@ usage() {
 ###############################################################################
 main() {
   # Ensure we are working in the correct folder
-  pushd "${MY_PATH}/.." || exit > /dev/null
+  pushd "${MY_CWD}" || exit > /dev/null
 
   setup_vars "$@"
 
@@ -102,6 +103,8 @@ main() {
   popd || exit > /dev/null
 }
 
+MY_CWD="$(pwd)"
+readonly MY_CWD
 MY_PATH="$(dirname "$0")"
 MY_PATH="$(cd "${MY_PATH}" && pwd)"
 readonly MY_PATH

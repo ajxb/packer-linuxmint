@@ -2,6 +2,7 @@
 # List available Packer templates and allow the user to select one
 # Globals:
 #   BOX
+#   MY_CWD
 # Arguments:
 #   None
 # Returns:
@@ -10,7 +11,7 @@
 select_basebox() {
   # Base boxes available for build
   PS3='Select machine : '
-  local readonly list="$(find . -maxdepth 1 -type f -name '*.json' -printf '%f\n' | grep -v ^core_template.json$)"
+  local readonly list="$(find ${MY_CWD} -maxdepth 1 -type f -name '*.json' -printf '%f\n' | grep -v ^core_template.json$)"
   local option
   select option in ${list}; do
     if [[ -n "${option}" ]]; then
