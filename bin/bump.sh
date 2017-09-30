@@ -89,6 +89,9 @@ patch() {
 }
 
 main() {
+  # Ensure we are working in the correct folder
+  pushd "${MY_PATH}/.." || exit > /dev/null
+
   args "$@"
   CURRENT_VERSION=$(jq -r '.version' "${template}")
   IFS="." read -r -a VERSION_LIST <<< "${CURRENT_VERSION}"
@@ -96,6 +99,14 @@ main() {
   MINOR_VERSION=${VERSION_LIST[1]}
   PATCH_VERSION=${VERSION_LIST[2]}
   ${subcommand}
+
+  popd || exit > /dev/null
 }
 
+MY_PATH="$(dirname "$0")"
+MY_PATH="$(cd "${MY_PATH}" && pwd)"
+readonly MY_PATH
+
 main "$@"
+
+exit 0

@@ -92,7 +92,7 @@ usage() {
 ###############################################################################
 main() {
   # Ensure we are working in the correct folder
-  pushd "${MY_PATH}" || exit > /dev/null
+  pushd "${MY_PATH}/.." || exit > /dev/null
 
   setup_vars "$@"
 
