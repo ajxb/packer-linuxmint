@@ -1,6 +1,7 @@
 {
   "_comment": "Build with `packer build -var-file=mint-cinnamon-18.2.json core_template.json`",
   "boot_command_prefix": "<esc><wait><tab><wait><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+  "box_tag": "ajxb/mint-18.2",
   "cpus": "2",
   "disk_size": "60000",
   "iso_checksum_type": "sha256",
@@ -9,6 +10,6 @@
   "memory": "4096",
   "preseed": "mint-18.2.seed",
   "vagrantfile_template": "tpl/vagrantfile-mint-cinnamon-18.2.tpl",
-  "version": "1.3.4",
-  "vm_name": "mint-cinnamon-18.2-box"
+  "version": "1.0.0",
+  "vm_name": "mint-cinnamon-18.2"
 }
