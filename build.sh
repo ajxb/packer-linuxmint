@@ -21,8 +21,8 @@ fi
 echo "Building ${BOX}"
 
 # Build the VM
-#packer build -var-file="${BOX}.json" core_template.json
-sleep 10
+packer build -var-file="${BOX}.json" core_template.json
+
 END_TIME=$(date +"%s")
 TIME_TAKEN=$((END_TIME - START_TIME))
 
