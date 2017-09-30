@@ -1,6 +1,5 @@
 #!/bin/bash -eux
 
-echo
-echo "***** reboot.sh *****"
-echo "***** rebooting *****"
+echo '==> Rebooting system'
+
 reboot

@@ -1,23 +1,25 @@
 #!/bin/bash -eux
 
 # Get release information
+# shellcheck disable=SC1091
 . /etc/os-release
 
 # Configure the Puppet apt repository (UBUNTU_CODENAME is defined in os-release)
-PUPPET_RELEASE=puppet5-release-$UBUNTU_CODENAME.deb
+PUPPET_RELEASE="puppet5-release-${UBUNTU_CODENAME}.deb"
 
 echo "==> Downloading ${PUPPET_RELEASE}"
 COUNTER=10
-until [ $COUNTER -eq 0 ]; do
-  wget http://apt.puppetlabs.com/$PUPPET_RELEASE
-  if [ $? -eq 0 ]; then break; fi
+until [[ ${COUNTER} -eq 0 ]]; do
 
-  let "COUNTER -= 1"
-  echo $COUNTER
+  if wget "http://apt.puppetlabs.com/${PUPPET_RELEASE}"; then
+    break
+  fi
+
+  (( COUNTER-- ))
 done
 
 echo "==> Installing ${PUPPET_RELEASE}"
-dpkg -i $PUPPET_RELEASE
+dpkg -i "${PUPPET_RELEASE}"
 
 echo '==> Updating apt database'
 apt-get update
@@ -34,4 +36,4 @@ gem install librarian-puppet
 
 # Clean up
 echo '==> Cleaning up'
-rm -f $PUPPET_RELEASE
+rm -f "${PUPPET_RELEASE}"
