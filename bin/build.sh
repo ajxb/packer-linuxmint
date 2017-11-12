@@ -11,7 +11,6 @@
 #   MY_PATH - Path to this script
 ###############################################################################
 
-
 ###############################################################################
 # Parse script input for validity and configure global variables for use
 # throughout the script
@@ -48,7 +47,7 @@ setup_vars() {
   while true; do
     case "$1" in
       -d|--deploy) readonly DEPLOY=true; shift ;;
-      -h|--help) usage; exit 0 ;;
+      -h|--help)   usage; exit 0 ;;
       --)          shift; break ;;
       * )          break ;;
     esac
