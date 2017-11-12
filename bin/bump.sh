@@ -144,7 +144,6 @@ tag() {
   git add CHANGELOG.md
   git commit -m "${tag_prefix} ${CURRENT_VERSION} pushed to Vagrant Cloud"
   git tag -a -m "${tag_prefix} ${CURRENT_VERSION} pushed to Vagrant Cloud" "${tag_prefix}_${CURRENT_VERSION}"
-  git push --tags || true
 }
 
 ###############################################################################
