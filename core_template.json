@@ -1,0 +1,110 @@
+{
+  "builders": [{
+    "vm_name": "{{user `vm_name`}}",
+    "type": "virtualbox-iso",
+    "guest_os_type": "Ubuntu_64",
+    "http_directory": "http",
+    "iso_url": "{{ user `iso_url` }}",
+    "iso_checksum": "{{ user `iso_checksum` }}",
+    "iso_checksum_type": "{{ user `iso_checksum_type` }}",
+    "ssh_password": "{{ user `ssh_password` }}",
+    "ssh_username": "{{ user `ssh_username` }}",
+    "ssh_wait_timeout": "10000s",
+    "headless": "{{ user `headless` }}",
+    "boot_command": [
+      "{{ user `boot_command_prefix` }}",
+      "/casper/vmlinuz ",
+      "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ user `preseed` }} ",
+      "boot=casper ",
+      "initrd=/casper/initrd.lz ",
+      "debug-ubiquity ",
+      "automatic-ubiquity ",
+      "quiet ",
+      "splash ",
+      "noprompt ",
+      "-- <enter>"
+    ],
+    "shutdown_command": "echo '{{ user `ssh_password` }}'|sudo -S shutdown -P now",
+    "post_shutdown_delay": "1m",
+    "disk_size": "{{ user `disk_size` }}",
+    "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+    "virtualbox_version_file": ".vbox_version",
+    "hard_drive_interface": "sata",
+    "vboxmanage": [
+      [ "modifyvm", "{{.Name}}", "--memory", "{{ user `memory` }}" ],
+      [ "modifyvm", "{{.Name}}", "--cpus", "{{ user `cpus` }}" ]
+    ]
+  }],
+  "post-processors": [
+    [
+      {
+        "compression_level": "9",
+        "keep_input_artifact": false,
+        "output": "box/{{.Provider}}/{{user `vm_name`}}-{{user `version`}}.box",
+        "type": "vagrant",
+        "vagrantfile_template": "{{ user `vagrantfile_template` }}"
+      },
+      {
+        "type": "vagrant-cloud",
+        "box_tag": "{{user `box_tag`}}",
+        "access_token": "{{user `cloud_token`}}",
+        "version": "{{user `version`}}",
+        "no_release": true
+      }
+    ]
+  ],
+  "provisioners": [
+    {
+      "execute_command": "echo '{{ user `ssh_password` }}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
+      "scripts": [
+        "script/rc_local.sh",
+        "script/apt.sh",
+        "script/sshd.sh"
+      ],
+      "type": "shell"
+    },
+    {
+      "execute_command": "echo '{{ user `ssh_password` }}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
+      "expect_disconnect": true,
+      "scripts": [
+        "script/update.sh",
+        "script/reboot.sh"
+      ],
+      "type": "shell"
+    },
+    {
+      "execute_command": "echo '{{ user `ssh_password` }}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
+      "pause_before": "60s",
+      "scripts": [
+        "script/vagrant.sh",
+        "script/install_puppet.sh",
+        "script/virtualbox.sh",
+        "script/motd.sh",
+        "script/cleanup.sh"
+      ],
+      "type": "shell"
+    }
+  ],
+  "variables": {
+    "cloud_token": "{{env `VAGRANT_CLOUD_TOKEN`}}",
+    "headless": "false",
+    "hostname": "vagrant",
+    "ssh_fullname": "vagrant",
+    "ssh_password": "vagrant",
+    "ssh_username": "vagrant",
+
+    "_comment": "Variables below should be overridden in template",
+    "boot_command_prefix": "TBD",
+    "box_tag": "TBD",
+    "cpus": "TBD",
+    "disk_size": "TBD",
+    "iso_checksum_type": "TBD",
+    "iso_checksum": "TBD",
+    "iso_url": "TBD",
+    "memory": "TBD",
+    "preseed": "TBD",
+    "vagrantfile_template": "TBD",
+    "version": "TBD",
+    "vm_name": "TBD"
+  }
+}
