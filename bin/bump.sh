@@ -4,20 +4,25 @@
 # Script to update Packer template version and git repository
 #
 # Globals:
-#   BOX     - The name of the template to build
-#   DEPLOY  - true indicates that the built artefact should be uploaded to
-#             Vagrant Cloud
+#   BOX     - The name of the template to update the version number on
+#   SUBCOMMAND
+#   TEMPLATE
+#   CURRENT_VERSION
+#   MAJOR_VERSION
+#   MINOR_VERSION
+#   PATCH_VERSION
+
 #   MY_CWD  - Path script was invoked from
 #   MY_PATH - Path to this script
 ###############################################################################
-
 
 ###############################################################################
 # Parse script input for validity and configure global variables for use
 # throughout the script
 # Globals:
 #   BOX
-#   DEPLOY
+#   SUBCOMMAND
+#   TEMPLATE
 # Arguments:
 #   $@
 # Returns:
@@ -48,8 +53,8 @@ setup_vars() {
   while true; do
     case "$1" in
       -h|--help) usage; exit 0 ;;
-      --)          shift; break ;;
-      * )          break ;;
+      --)        shift; break ;;
+      * )        break ;;
     esac
   done
 
@@ -70,12 +75,12 @@ setup_vars() {
     exit 1
   fi
 
-  subcommand=$1
-  template=$2
+  SUBCOMMAND=$1
+  TEMPLATE=$2
 
-  # Prompt for box to build if not supplied on the command line
+  # Prompt for template to update if not supplied on the command line
   if [[ "$#" -eq 0 ]]; then
-    echo 'Select a basebox to build:'
+    echo 'Select a basebox for version bump:'
     select_basebox
   else
     BOX=$1
@@ -83,7 +88,15 @@ setup_vars() {
   readonly BOX
 }
 
-
+###############################################################################
+# Output usage information for the script to the terminal
+# Globals:
+#   $0
+# Arguments:
+#   None
+# Returns:
+#   None
+###############################################################################
 usage() {
   echo "usage: $(basename "$0") <subcommand> template"
   echo
@@ -95,41 +108,81 @@ usage() {
   echo "  tag        Tag in Git using current version"
 }
 
-args() {
-  case $subcommand in
-  "" | "-h" | "--help")
-    usage
-    ;;
-  *)
-    shift
-    ;;
-  esac
-}
-
+###############################################################################
+# Output the current version of the box template
+# Globals:
+#   CURRENT_VERSION
+# Arguments:
+#   None
+# Returns:
+#   None
+###############################################################################
 current() {
   echo "Current version: ${CURRENT_VERSION}"
 }
 
+###############################################################################
+# Tag the repo with the current version of the template, in the format :
+#   $TAG_PREFIX_$CURRENT_VERSION
+# Where the TAG_PREFIX is the name of the template and the version is the
+# version number contained within. E.g. mint-cinnamon-18.2_1.0.0
+# Globals:
+#   CURRENT_VERSION
+#   TEMPLATE
+# Arguments:
+#   None
+# Returns:
+#   None
+###############################################################################
 tag() {
-  TAG_PREFIX="${template%.*}"
-  echo "Tagged: ${TAG_PREFIX}_${CURRENT_VERSION}"
+  local tag_prefix
+  tag_prefix="${TEMPLATE%.*}"
+  readonly tag_prefix
+
+  echo "Tagged: ${tag_prefix}_${CURRENT_VERSION}"
   git fetch --all > /dev/null
   git add CHANGELOG.md
-  git commit -m "${TAG_PREFIX} ${CURRENT_VERSION} pushed to Vagrant Cloud"
-  git tag -a -m "${TAG_PREFIX} ${CURRENT_VERSION} pushed to Vagrant Cloud" "${TAG_PREFIX}_${CURRENT_VERSION}"
+  git commit -m "${tag_prefix} ${CURRENT_VERSION} pushed to Vagrant Cloud"
+  git tag -a -m "${tag_prefix} ${CURRENT_VERSION} pushed to Vagrant Cloud" "${tag_prefix}_${CURRENT_VERSION}"
   git push --tags || true
 }
 
+###############################################################################
+# Commit version number changes to repo
+# Globals:
+#   MAJOR_VERSION
+#   MINOR_VERSION
+#   PATCH_VERSION
+#   TEMPLATE
+# Arguments:
+#   None
+# Returns:
+#   None
+###############################################################################
 write_version() {
-  NEXT_VERSION=${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}
-  echo "Updating ${template} version to ${NEXT_VERSION}"
-  jq ".version=\"${NEXT_VERSION}\"" "${template}" > "${template}.tmp"
-  mv -f "${template}.tmp" "$template"
+  local next_version
+  next_version=${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}
+  readonly next_version
+
+  echo "Updating ${TEMPLATE} version to ${next_version}"
+  jq ".version=\"${next_version}\"" "${TEMPLATE}" > "${TEMPLATE}.tmp"
+  mv -f "${TEMPLATE}.tmp" "${TEMPLATE}"
   git fetch --all > /dev/null
-  git add "${template}"
-  git commit -m "Bump ${template} to ${NEXT_VERSION}"
+  git add "${TEMPLATE}"
+  git commit -m "Bump ${TEMPLATE} to ${next_version}"
 }
 
+###############################################################################
+# Update the major version
+# Globals:
+#   MAJOR_VERSION
+#   MINOR_VERSION
+#   PATCH_VERSION
+# Arguments:
+#   None
+# Returns:
+#   None
+###############################################################################
 major() {
   MAJOR_VERSION=$((MAJOR_VERSION+1))
   MINOR_VERSION=0
@@ -137,6 +190,17 @@ major() {
   write_version
 }
 
+###############################################################################
+# Update the minor version
+# Globals:
+#   MAJOR_VERSION
+#   MINOR_VERSION
+#   PATCH_VERSION
+# Arguments:
+#   None
+# Returns:
+#   None
+###############################################################################
 minor() {
   MAJOR_VERSION=${MAJOR_VERSION}
   MINOR_VERSION=$((MINOR_VERSION+1))
@@ -144,6 +208,17 @@ minor() {
   write_version
 }
 
+###############################################################################
+# Update the patch version
+# Globals:
+#   MAJOR_VERSION
+#   MINOR_VERSION
+#   PATCH_VERSION
+# Arguments:
+#   None
+# Returns:
+#   None
+###############################################################################
 patch() {
   MAJOR_VERSION=${MAJOR_VERSION}
   MINOR_VERSION=${MINOR_VERSION}
@@ -151,24 +226,45 @@ patch() {
   write_version
 }
 
+###############################################################################
+# Main body of script processing
+# Globals:
+#   CURRENT_VERSION
+#   MAJOR_VERSION
+#   MINOR_VERSION
+#   MY_CWD
+#   MY_PATH
+#   PATCH_VERSION
+#   SUBCOMMAND
+# Arguments:
+#   $@
+# Returns:
+#   None
+###############################################################################
 main() {
   # Ensure we are working in the correct folder
-  pushd "${MY_PATH}/.." || exit > /dev/null
+  pushd "${MY_CWD}" || exit > /dev/null
 
-  args "$@"
-  CURRENT_VERSION=$(jq -r '.version' "${template}")
-  IFS="." read -r -a VERSION_LIST <<< "${CURRENT_VERSION}"
-  MAJOR_VERSION=${VERSION_LIST[0]}
-  MINOR_VERSION=${VERSION_LIST[1]}
-  PATCH_VERSION=${VERSION_LIST[2]}
-  ${subcommand}
+  setup_vars "$@"
+  CURRENT_VERSION=$(jq -r '.version' "${TEMPLATE}")
+  local version_list
+  IFS="." read -r -a version_list <<< "${CURRENT_VERSION}"
+  MAJOR_VERSION=${version_list[0]}
+  MINOR_VERSION=${version_list[1]}
+  PATCH_VERSION=${version_list[2]}
+  ${SUBCOMMAND}
 
   popd || exit > /dev/null
 }
 
+MY_CWD="$(pwd)"
+readonly MY_CWD
 MY_PATH="$(dirname "$0")"
 MY_PATH="$(cd "${MY_PATH}" && pwd)"
 readonly MY_PATH
+
+# shellcheck source=/dev/null
+source "${MY_PATH}/select_basebox.sh"
 
 main "$@"
 
