@@ -7,6 +7,7 @@ This repository contains Packer templates for creating Linux Mint Cinnamon Vagra
 ## Current boxes
 
 * [Linux Mint 18.2 (64-bit)](https://app.vagrantup.com/ajxb/boxes/mint-18.2)
+* [Linux Mint 18.3 (64-bit)](https://app.vagrantup.com/ajxb/boxes/mint-18.3)
 
 ## Building the Vagrant boxes with Packer
 
