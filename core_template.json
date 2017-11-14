@@ -49,6 +49,7 @@
         "box_tag": "{{user `box_tag`}}",
         "access_token": "{{user `cloud_token`}}",
         "version": "{{user `version`}}",
+        "version_description": "{{user `version_description`}}",
         "no_release": true
       }
     ]
@@ -105,6 +106,7 @@
     "preseed": "TBD",
     "vagrantfile_template": "TBD",
     "version": "TBD",
+    "version_description": "TBD",
     "vm_name": "TBD"
   }
 }
