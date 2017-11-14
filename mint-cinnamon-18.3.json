@@ -1,0 +1,15 @@
+{
+  "_comment": "Build with `packer build -var-file=mint-cinnamon-18.3.json core_template.json`",
+  "boot_command_prefix": "<esc><wait><tab><wait><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+  "box_tag": "ajxb/mint-18.3",
+  "cpus": "2",
+  "disk_size": "60000",
+  "iso_checksum_type": "sha256",
+  "iso_checksum": "39ab74eaaa83341ddd57f2698f6f711b4375953b5db208fc4fb5b368e2686e65",
+  "iso_url": "http://www.mirrorservice.org/sites/www.linuxmint.com/pub/linuxmint.com/testing/linuxmint-18.3-cinnamon-64bit-beta.iso",
+  "memory": "4096",
+  "preseed": "mint-18.seed",
+  "vagrantfile_template": "tpl/vagrantfile-mint-cinnamon-18.tpl",
+  "version": "1.0.0",
+  "vm_name": "mint-cinnamon-18.3"
+}
