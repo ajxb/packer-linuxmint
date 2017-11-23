@@ -1,8 +1,8 @@
 ###############################################################################
 # List available Packer templates and allow the user to select one
 # Globals:
-#   BOX
-#   MY_CWD
+#   BOX     - The name of the template selected
+#   MY_CWD  - Path script was invoked from
 # Arguments:
 #   None
 # Returns:

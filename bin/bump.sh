@@ -4,16 +4,15 @@
 # Script to update Packer template version and git repository
 #
 # Globals:
-#   BOX     - The name of the template to update the version number on
-#   SUBCOMMAND
-#   TEMPLATE
-#   CURRENT_VERSION
-#   MAJOR_VERSION
-#   MINOR_VERSION
-#   PATCH_VERSION
-
-#   MY_CWD  - Path script was invoked from
-#   MY_PATH - Path to this script
+#   BOX             - The name of the template to update the version number on
+#   CURRENT_VERSION - The current version as read from the given template
+#   MAJOR_VERSION   - The major version derived from the CURRENT_VERSION
+#   MINOR_VERSION   - The minor version derived from the CURRENT_VERSION
+#   MY_CWD          - Path script was invoked from
+#   MY_PATH         - Path to this script
+#   PATCH_VERSION   - The patch version derived from the CURRENT_VERSION
+#   SUBCOMMAND      - The subcommand to execute for the given template
+#   TEMPLATE        - The name of the template to use for the command
 ###############################################################################
 
 ###############################################################################
