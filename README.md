@@ -26,7 +26,7 @@ For example, to build Linux Mint 18.2, use the following:
 We've also provided a wrapper script `bin\build.sh` for ease of use, so alternatively, you can use
 the following to build Linux Mint 18.2 for all providers:
 
-    $ ./bin/build.sh mint-cinnamon-18.2
+    $ ./bin/build.sh mint-cinnamon-18.2.json
 
 ## Contributing
 
