@@ -10,7 +10,7 @@
   "memory": "4096",
   "preseed": "mint-18.seed",
   "vagrantfile_template": "tpl/vagrantfile-mint-cinnamon-18.tpl",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "version_description": "Linux Mint 18.3 with VirtualBox Guest Additions",
   "vm_name": "mint-cinnamon-18.3"
 }
