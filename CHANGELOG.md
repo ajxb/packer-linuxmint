@@ -1,5 +1,10 @@
 # Changelog
 
+## mint-cinnamon-19.0_1.0.1 (2018-07-01)
+
+* Linux Mint 19.0 final release - built against VirtualBox 5.2.12
+* Build script updates
+
 ## mint-cinnamon-19.0_1.0.0 (2018-06-07)
 
 * Linux Mint 19.0 beta release - built against VirtualBox 5.2.12
