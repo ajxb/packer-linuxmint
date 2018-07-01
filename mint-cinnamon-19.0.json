@@ -5,12 +5,12 @@
   "cpus": "2",
   "disk_size": "60000",
   "iso_checksum_type": "sha256",
-  "iso_checksum": "dd2a619f84a55084a3fcc743ceecce3c004ef22919662b09fbc08657c185608b",
-  "iso_url": "http://www.mirrorservice.org/sites/www.linuxmint.com/pub/linuxmint.com/testing/linuxmint-19-cinnamon-64bit-beta.iso",
+  "iso_checksum": "41dd237ed33a4cc5865ef52cd92b479cded0a9341956de4d6adb794e9c1c10a9",
+  "iso_url": "http://www.mirrorservice.org/sites/www.linuxmint.com/pub/linuxmint.com/stable/19/linuxmint-19-cinnamon-64bit.iso",
   "memory": "4096",
   "preseed": "mint-19.seed",
   "vagrantfile_template": "tpl/vagrantfile-mint-cinnamon-19.tpl",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "version_description": "Linux Mint 19.0 with VirtualBox Guest Additions 5.2.12",
   "vm_name": "mint-cinnamon-19.0"
 }
