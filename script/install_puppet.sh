@@ -8,12 +8,6 @@
 PUPPET_RELEASE="puppet5-release-${UBUNTU_CODENAME}.deb"
 PUPPET_URL='http://apt.puppetlabs.com'
 
-if [[ "${UBUNTU_CODENAME}" == 'bionic' ]]; then
-  echo '==> BIONIC'
-  PUPPET_RELEASE="puppet5-nightly-release-bionic.deb"
-  PUPPET_URL='http://nightlies.puppet.com/apt'
-fi
-
 echo "==> Downloading ${PUPPET_RELEASE}"
 COUNTER=10
 until [[ ${COUNTER} -eq 0 ]]; do
