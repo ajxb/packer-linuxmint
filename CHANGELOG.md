@@ -1,5 +1,10 @@
 # Changelog
 
+## mint-cinnamon-19.0_1.0.2 (2018-07-02)
+
+* Linux Mint 19.0 final release - built against VirtualBox 5.2.12
+* Use puppet release repository for puppet packages
+
 ## mint-cinnamon-19.0_1.0.1 (2018-07-01)
 
 * Linux Mint 19.0 final release - built against VirtualBox 5.2.12
