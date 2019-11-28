@@ -1,0 +1,16 @@
+{
+  "_comment": "Build with `packer build -var-file=mint-cinnamon-19.1.json core_template.json`",
+  "boot_command_prefix": "<esc><wait><tab><wait><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+  "box_tag": "ajxb/mint-19.1",
+  "cpus": "2",
+  "disk_size": "60000",
+  "iso_checksum_type": "sha256",
+  "iso_checksum": "bb4b3ad584f2fec1d91ad60fe57ad4044e5c0934a5e3d229da129c9513862eb0",
+  "iso_url": "http://www.mirrorservice.org/sites/www.linuxmint.com/pub/linuxmint.com/stable/19.1/linuxmint-19.1-cinnamon-64bit.iso",
+  "memory": "4096",
+  "preseed": "mint-19.seed",
+  "vagrantfile_template": "tpl/vagrantfile-mint-cinnamon-19.tpl",
+  "version": "1.0.0",
+  "version_description": "Linux Mint 19.1 with VirtualBox Guest Additions 5.2.12",
+  "vm_name": "mint-cinnamon-19.1"
+}
