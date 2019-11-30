@@ -1,7 +1,7 @@
 {
   "_comment": "Build with `packer build -var-file=mint-cinnamon-19.0.json core_template.json`",
   "boot_command_prefix": "<esc><wait><tab><wait><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-  "box_tag": "ajxb/mint-19.0",
+  "box_tag": "epipho/mint-19.0",
   "cpus": "2",
   "disk_size": "60000",
   "iso_checksum_type": "sha256",
@@ -11,6 +11,6 @@
   "preseed": "mint-19.seed",
   "vagrantfile_template": "tpl/vagrantfile-mint-cinnamon-19.tpl",
   "version": "1.0.2",
-  "version_description": "Linux Mint 19.0 with VirtualBox Guest Additions 5.2.12",
+  "version_description": "Linux Mint 19.0 with VirtualBox Guest Additions 6.0.14",
   "vm_name": "mint-cinnamon-19.0"
 }
