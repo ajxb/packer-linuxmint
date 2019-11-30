@@ -1,5 +1,14 @@
 # Changelog
 
+## ming-cinnamon-10.1_1.0.1 (2019-11-29)
+
+* Linux Mint 19.1 final release - built against VirtualBox 6.0.14
+
+## ming-cinnamon-10.2_1.0.0 (2019-11-29)
+
+* Linux Mint 19.2 final release - built against VirtualBox 6.0.14
+* Fixed update script to avoid interactive dist-upgrade
+
 ## mint-cinnamon-19.0_1.0.2 (2018-07-02)
 
 * Linux Mint 19.0 final release - built against VirtualBox 5.2.12
