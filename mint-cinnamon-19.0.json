@@ -10,7 +10,7 @@
   "memory": "4096",
   "preseed": "mint-19.seed",
   "vagrantfile_template": "tpl/vagrantfile-mint-cinnamon-19.tpl",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "version_description": "Linux Mint 19.0 with VirtualBox Guest Additions 6.0.14",
   "vm_name": "mint-cinnamon-19.0"
 }
