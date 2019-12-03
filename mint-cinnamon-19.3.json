@@ -1,0 +1,16 @@
+{
+  "_comment": "Build with `packer build -var-file=mint-cinnamon-19.2.json core_template.json`",
+  "boot_command_prefix": "<esc><wait><tab><wait><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+  "box_tag": "epipho/mint-19.3",
+  "cpus": "2",
+  "disk_size": "60000",
+  "iso_checksum_type": "sha256",
+  "iso_checksum": "7b53820340d62f43884d2fb9b1c376877ef0a0013d3cf8f0f0b25ea1f65ac9b3",
+  "iso_url": "http://www.mirrorservice.org/sites/www.linuxmint.com/pub/linuxmint.com/testing/linuxmint-19.3-cinnamon-64bit-beta.iso",
+  "memory": "4096",
+  "preseed": "mint-19.seed",
+  "vagrantfile_template": "tpl/vagrantfile-mint-cinnamon-19.tpl",
+  "version": "0.1.0",
+  "version_description": "Linux Mint 19.3 Beta with VirtualBox Guest Additions 6.0.14",
+  "vm_name": "mint-cinnamon-19.3"
+}
